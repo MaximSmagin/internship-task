@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LoginForm from "./components/LoginForm";
 import HardwareList from "./components/HardwareList";
+import RentList from "./components/RentList";
 import "./App.css";
 
 function App() {
@@ -116,20 +117,26 @@ function App() {
         </div> */
         <table>
           <tr>
-            <td>
+            <td className="td1">
               {" "}
               <h2>
                 Welcome, <span>{user.name}</span>
               </h2>
-              <button onClick={selectHWList}>Hardware List</button>
-              <button onClick={selectRentList}>Rent List</button>
-              <button onClick={Logout}>Logout</button>
+              <button className="HWListBtn" onClick={selectHWList}>
+                Hardware List
+              </button>
+              <button className="RentListBtn" onClick={selectRentList}>
+                Rent List
+              </button>
+              <button className="LogutBtn" onClick={Logout}>
+                Logout
+              </button>
             </td>
             <td>
               {currentList === 1 ? (
                 <HardwareList prodTable={productTable} />
               ) : (
-                <h>Rent List</h>
+                <RentList prodTable={productTable} />
               )}
             </td>
           </tr>

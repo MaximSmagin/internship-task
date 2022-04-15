@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import '../HardwareList.css'
+import "../HardwareList.css";
 
 const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = useState(config);
@@ -49,7 +49,7 @@ const ProductTable = (props) => {
   };
   return (
     <table>
-      <caption className="TableHeader">Hardware List</caption>
+      <caption className="TableHeader">Rent List</caption>
       <thead>
         <tr>
           <th>
@@ -70,16 +70,7 @@ const ProductTable = (props) => {
               Date
             </button>
           </th>
-          <th>
-            <button
-              type="button"
-              onClick={() => requestSort("availability")}
-              className={getClassNamesFor("availability")}
-            >
-              Availability
-            </button>
-          </th>
-          <th> Rent</th>
+          <th> Return</th>
         </tr>
       </thead>
       <tbody>
@@ -87,7 +78,7 @@ const ProductTable = (props) => {
           <tr key={item.id}>
             <td>{item.name}</td>
             <td>{item.date}</td>
-            <td>{item.availability}</td>
+
             <td>
               {" "}
               <button
@@ -113,9 +104,9 @@ const ProductTable = (props) => {
   );
 };
 
-export default function HardwareList(prodTable) {
+export default function RentList(prodTable) {
   return (
-    <div className="HardwareList">
+    <div className="RentList">
       <ProductTable products={prodTable} />
     </div>
   );
