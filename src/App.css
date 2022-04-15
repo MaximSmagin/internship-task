@@ -100,6 +100,6 @@ form .form-inner input[type='submit']:hover {
   background-color: silver;
 }
 
-error {
+.error {
   color: red;
 }
