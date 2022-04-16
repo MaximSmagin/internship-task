@@ -4,6 +4,69 @@ import HardwareList from "./components/HardwareList";
 import RentList from "./components/RentList";
 import "./App.css";
 
+const productTable = [
+  {
+    id: 1,
+    name: "Apple Iphone 13pro",
+    date: "2021-03-10",
+    availability: "Available",
+  },
+  {
+    id: 2,
+    name: "Apple Iphone 13pro Max",
+    date: "2021-03-15",
+    availability: "Available",
+  },
+  {
+    id: 3,
+    name: "Apple Iphone 12pro",
+    date: "2021-03-17",
+    availability: "Available",
+  },
+  {
+    id: 4,
+    name: "Apple Iphone 12pro Max",
+    date: "2021-04-03",
+    availability: "Not Available",
+  },
+  {
+    id: 5,
+    name: "Apple MacBook pro",
+    date: "2020-04-10",
+    availability: "Not Available",
+  },
+  {
+    id: 6,
+    name: "Apple MacBook 2020",
+    date: "2021-05-10",
+    availability: "Available",
+  },
+  {
+    id: 7,
+    name: "Apple MacBook Air",
+    date: "2021-05-20",
+    availability: "Available",
+  },
+  {
+    id: 8,
+    name: "Samsung ZenBook",
+    date: "2021-03-12",
+    availability: "Not Available",
+  },
+  {
+    id: 9,
+    name: "Samsung Galaxy s22",
+    date: "2020-08-11",
+    availability: "Available",
+  },
+  {
+    id: 10,
+    name: "Samsung Galaxy s22 ultra",
+    date: "2021-11-15",
+    availability: "Available",
+  },
+];
+
 function App() {
   const adminUser = {
     email: "admin@user.com",
@@ -13,85 +76,45 @@ function App() {
   const [user, setUser] = useState({ name: "", email: "" });
   const [error, setError] = useState("");
   const [currentList, setCurrentList] = useState(1);
-  const productTable = [
-    {
-      id: 1,
-      name: "Apple Iphone 13pro",
-      date: "2021-03-10",
-      availability: "Available",
-    },
-    {
-      id: 2,
-      name: "Apple Iphone 13pro Max",
-      date: "2021-03-15",
-      availability: "Available",
-    },
-    {
-      id: 3,
-      name: "Apple Iphone 12pro",
-      date: "2021-03-17",
-      availability: "Available",
-    },
-    {
-      id: 4,
-      name: "Apple Iphone 12pro Max",
-      date: "2021-04-03",
-      availability: "Not Available",
-    },
-    {
-      id: 5,
-      name: "Apple MacBook pro",
-      date: "2020-04-10",
-      availability: "Not Available",
-    },
-    {
-      id: 6,
-      name: "Apple MacBook 2020",
-      date: "2021-05-10",
-      availability: "Available",
-    },
-    {
-      id: 7,
-      name: "Apple MacBook Air",
-      date: "2021-05-20",
-      availability: "Available",
-    },
-    {
-      id: 8,
-      name: "Samsung ZenBook",
-      date: "2021-03-12",
-      availability: "Not Available",
-    },
-    {
-      id: 9,
-      name: "Samsung Galaxy s22",
-      date: "2020-08-11",
-      availability: "Available",
-    },
-    {
-      id: 10,
-      name: "Samsung Galaxy s22 ultra",
-      date: "2021-11-15",
-      availability: "Available",
-    },
-  ];
+
+  function rentCall(item) {
+    productTable.forEach((element) => {
+      if (element.id === item.id) {
+        element.availability = "Not Available";
+      }
+    });
+  }
+
+  function returnCall(item) {
+    productTable.forEach((element) => {
+      if (element.id === item.id) {
+        element.availability = "Available";
+      }
+    });
+  }
+
+  function RentTable() {
+    let newProductTable = [];
+
+    productTable.forEach((it) => {
+      if (it.availability === "Not Available") {
+        newProductTable.push(it);
+      }
+    });
+
+    return newProductTable;
+  }
 
   const Login = (details) => {
-    console.log(details);
-    /* TODO: replace to backend here */
     if (
       details.email === adminUser.email &&
       details.password === adminUser.password
     ) {
-      console.log("Logged in");
-
       setUser({
         name: details.name,
         email: details.email,
       });
     } else {
-      console.log("Details do not match!");
-
       setError("Incorrect data!");
     }
   };
@@ -122,21 +145,24 @@ function App() {
               <h2>
                 Welcome, <span>{user.name}</span>
               </h2>
-              <button className="HWListBtn" onClick={selectHWList}>
-                Hardware List
-              </button>
-              <button className="RentListBtn" onClick={selectRentList}>
-                Rent List
-              </button>
+              <div>
+                <button className="HWListBtn" onClick={selectHWList}>
+                  Hardware List
+                </button>
+                <br />
+                <button className="RentListBtn" onClick={selectRentList}>
+                  Rent List
+                </button>
+              </div>
               <button className="LogutBtn" onClick={Logout}>
                 Logout
               </button>
             </td>
-            <td>
+            <td className="td2">
               {currentList === 1 ? (
-                <HardwareList prodTable={productTable} />
+                <HardwareList prodTable={productTable} rentFunc={rentCall} />
               ) : (
-                <RentList prodTable={productTable} />
+                <RentList prodTable={RentTable()} returnFunc={returnCall} />
               )}
             </td>
           </tr>

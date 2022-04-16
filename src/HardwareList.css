@@ -23,16 +23,17 @@ thead button {
   font-size: inherit;
   padding: 0.5em;
   margin-bottom: 1px;
+  cursor: pointer;
 }
 
 thead button.ascending::after {
-  content: '👇';
+  content: '▲';
   display: inline-block;
   margin-left: 1em;
 }
 
 thead button.descending::after {
-  content: '☝️';
+  content: '▼';
   display: inline-block;
   margin-left: 1em;
 }
@@ -47,10 +48,10 @@ tbody td {
 } */
 
 .RentBtn {
-   display: inline-block;
+  display: inline-block;
   padding: 10px 15px;
   border-radius: 8px;
-  background-color: #53565A;
+  background-color: #90EE90;
   background-size: 200%;
   background-position: 0%;
   transition: 0.4s;
@@ -58,9 +59,14 @@ tbody td {
   font-weight: 700;
   cursor: pointer;
 }
+.RentBtn[disabled] {
+background-color: gray;
+pointer-events: none;
+}
 
 .RentBtn:hover {
   background-color: silver;
+
 }
 
 .TableHeader {

@@ -118,10 +118,19 @@ form .form-inner input[type='submit']:hover {
 
 }
 
+.td1 div{
+ margin-bottom: 500px;
+}
+
+.td2 {
+  width: 80%;
+}
+
 .LogutBtn {
    display: inline-block;
   padding: 10px 15px;
   border-radius: 8px;
+  width: 150px;
   background-color: #53565A;
   background-size: 200%;
   background-position: 0%;
@@ -138,7 +147,9 @@ form .form-inner input[type='submit']:hover {
 .HWListBtn, .RentListBtn {
   display: inline-block;
   padding: 10px 15px;
+  margin: 2px;
   border-radius: 8px;
+  width: 150px;
   background-color: #1c1e20;
   background-size: 200%;
   background-position: 0%;

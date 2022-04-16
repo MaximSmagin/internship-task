@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import '../HardwareList.css'
+import "../HardwareList.css";
 
 const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = useState(config);
@@ -36,8 +36,6 @@ const useSortableData = (items, config = null) => {
 };
 
 const ProductTable = (props) => {
-  //console.log(props.products)
-  //console.log(props.products.prodTable)
   const { items, requestSort, sortConfig } = useSortableData(
     props.products.prodTable
   );
@@ -46,6 +44,9 @@ const ProductTable = (props) => {
       return;
     }
     return sortConfig.key === name ? sortConfig.direction : undefined;
+  };
+  const RentItem = (item) => {
+    props.products.rentFunc(item);
   };
   return (
     <table>
@@ -92,15 +93,8 @@ const ProductTable = (props) => {
               {" "}
               <button
                 className="RentBtn"
-                style={{
-                  backgroundColor:
-                    item.availability === "Available" ? "#90EE90" : "gray",
-                }}
-                enabled={{
-                  backgroundColor:
-                    item.availability === "Available" ? "true" : "false",
-                }}
-                onclick="return false;"
+                disabled={item.availability === "Available" ? false : true}
+                onClick={() => RentItem(item)}
               >
                 {" "}
                 Rent
@@ -113,10 +107,10 @@ const ProductTable = (props) => {
   );
 };
 
-export default function HardwareList(prodTable) {
+export default function HardwareList(prodTable, rentFunc) {
   return (
     <div className="HardwareList">
-      <ProductTable products={prodTable} />
+      <ProductTable products={prodTable} rentFunc={rentFunc} />
     </div>
   );
 }

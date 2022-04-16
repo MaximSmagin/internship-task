@@ -36,8 +36,6 @@ const useSortableData = (items, config = null) => {
 };
 
 const ProductTable = (props) => {
-  //console.log(props.products)
-  //console.log(props.products.prodTable)
   const { items, requestSort, sortConfig } = useSortableData(
     props.products.prodTable
   );
@@ -47,6 +45,11 @@ const ProductTable = (props) => {
     }
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
+
+  const returnItem = (item) => {
+    props.products.returnFunc(item);
+  };
+
   return (
     <table>
       <caption className="TableHeader">Rent List</caption>
@@ -83,18 +86,12 @@ const ProductTable = (props) => {
               {" "}
               <button
                 className="RentBtn"
-                style={{
-                  backgroundColor:
-                    item.availability === "Available" ? "#90EE90" : "gray",
+                onClick={() => {
+                  returnItem(item);
                 }}
-                enabled={{
-                  backgroundColor:
-                    item.availability === "Available" ? "true" : "false",
-                }}
-                onclick="return false;"
               >
                 {" "}
-                Rent
+                return
               </button>{" "}
             </td>
           </tr>
@@ -104,10 +101,10 @@ const ProductTable = (props) => {
   );
 };
 
-export default function RentList(prodTable) {
+export default function RentList(prodTable, returnFunc) {
   return (
     <div className="RentList">
-      <ProductTable products={prodTable} />
+      <ProductTable products={prodTable} returnFunc={returnFunc} />
     </div>
   );
 }
