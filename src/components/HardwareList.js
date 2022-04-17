@@ -39,15 +39,18 @@ const ProductTable = (props) => {
   const { items, requestSort, sortConfig } = useSortableData(
     props.products.prodTable
   );
+
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
     }
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
+
   const RentItem = (item) => {
     props.products.rentFunc(item);
   };
+
   return (
     <table>
       <caption className="TableHeader">Hardware List</caption>
@@ -88,17 +91,23 @@ const ProductTable = (props) => {
           <tr key={item.id}>
             <td>{item.name}</td>
             <td>{item.date}</td>
-            <td>{item.availability}</td>
             <td>
-              {" "}
+              <span
+                style={{
+                  color: item.availability === "Available" ? "green" : "red",
+                }}
+              >
+                {item.availability}
+              </span>
+            </td>
+            <td>
               <button
                 className="RentBtn"
                 disabled={item.availability === "Available" ? false : true}
                 onClick={() => RentItem(item)}
               >
-                {" "}
                 Rent
-              </button>{" "}
+              </button>
             </td>
           </tr>
         ))}

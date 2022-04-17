@@ -76,6 +76,7 @@ function App() {
   const [user, setUser] = useState({ name: "", email: "" });
   const [error, setError] = useState("");
   const [currentList, setCurrentList] = useState(1);
+  const [rentListState, setNewRentList] = useState(RentTable());
 
   function rentCall(item) {
     productTable.forEach((element) => {
@@ -83,6 +84,8 @@ function App() {
         element.availability = "Not Available";
       }
     });
+    //post to server for update product here
+    setNewRentList(RentTable());
   }
 
   function returnCall(item) {
@@ -91,6 +94,8 @@ function App() {
         element.availability = "Available";
       }
     });
+    //post to server for update product here
+    setNewRentList(RentTable());
   }
 
   function RentTable() {
@@ -162,7 +167,7 @@ function App() {
               {currentList === 1 ? (
                 <HardwareList prodTable={productTable} rentFunc={rentCall} />
               ) : (
-                <RentList prodTable={RentTable()} returnFunc={returnCall} />
+                <RentList prodTable={rentListState} returnFunc={returnCall} />
               )}
             </td>
           </tr>

@@ -39,6 +39,7 @@ const ProductTable = (props) => {
   const { items, requestSort, sortConfig } = useSortableData(
     props.products.prodTable
   );
+
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
@@ -83,16 +84,14 @@ const ProductTable = (props) => {
             <td>{item.date}</td>
 
             <td>
-              {" "}
               <button
                 className="RentBtn"
                 onClick={() => {
                   returnItem(item);
                 }}
               >
-                {" "}
                 return
-              </button>{" "}
+              </button>
             </td>
           </tr>
         ))}
